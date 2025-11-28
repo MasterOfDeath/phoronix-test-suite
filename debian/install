@@ -1,0 +1,2 @@
+pts-core usr/share/phoronix-test-suite/
+debian/scripts/phoronix-test-suite usr/bin

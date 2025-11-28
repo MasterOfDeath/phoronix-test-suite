@@ -1,0 +1,6 @@
+phoronix-test-suite (10.8.4-1) unstable; urgency=medium
+
+  [ Rinat Gumirov ]
+  * Initial release (Closes: #905925)
+
+ -- Rinat Gumirov <rinat.gumirov@mail.ru>  Wed, 26 Nov 2025 19:42:25 +0500
