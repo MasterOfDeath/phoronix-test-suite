@@ -1,0 +1,21 @@
+Description: Fix deprecated string interpolation.
+Author: Rinat Gumirov <rinat.gumirov@mail.ru>
+Last-Update: 2025-11-28
+
+--- a/pts-core/commands/check_tests.php
++++ b/pts-core/commands/check_tests.php
+@@ -244,11 +244,11 @@
+ 			$secs = floor($secs);
+ 
+ 		if ($hours == 0 && $mins == 0)
+-			return "${secs}s";
++			return "{$secs}s";
+ 		else if ($hours == 0)
+-			return "${mins}m ${secs}s";
++			return "{$mins}m {$secs}s";
+ 		else
+-			return "${hours}h ${mins}m ${secs}s";
++			return "{$hours}h {$mins}m {$secs}s";
+ 	}
+ 
+ 	/**

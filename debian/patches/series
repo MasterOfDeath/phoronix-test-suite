@@ -1,1 +1,3 @@
 0002-fix-man-page-syntax.patch
+0003-fix-deprecated-string-interpolation.patch
+0004-fix-deprecated-trigger-error.patch
