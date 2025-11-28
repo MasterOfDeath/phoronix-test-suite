@@ -2,8 +2,8 @@ Description: Fix syntax error in man page (remove trailing .TP)
 Author: Rinat Gumirov <rinat.gumirov@mail.ru>
 Last-Update: 2025-11-26
 
---- a/documentation/man-pages/phoronix-test-suite.1
-+++ b/documentation/man-pages/phoronix-test-suite.1
+--- phoronix-test-suite-10.8.4.orig/documentation/man-pages/phoronix-test-suite.1
++++ phoronix-test-suite-10.8.4/documentation/man-pages/phoronix-test-suite.1
 @@ -458,4 +458,3 @@
  .br
  .SH AUTHORS

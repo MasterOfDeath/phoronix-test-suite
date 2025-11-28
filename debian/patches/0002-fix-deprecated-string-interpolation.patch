@@ -2,8 +2,8 @@ Description: Fix deprecated string interpolation.
 Author: Rinat Gumirov <rinat.gumirov@mail.ru>
 Last-Update: 2025-11-28
 
---- a/pts-core/commands/check_tests.php
-+++ b/pts-core/commands/check_tests.php
+--- phoronix-test-suite-10.8.4.orig/pts-core/commands/check_tests.php
++++ phoronix-test-suite-10.8.4/pts-core/commands/check_tests.php
 @@ -244,11 +244,11 @@
  			$secs = floor($secs);
  
