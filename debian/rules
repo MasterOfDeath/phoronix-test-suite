@@ -1,0 +1,8 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+# Empty overrides to skip the standard build steps
+override_dh_auto_build:
+override_dh_auto_test:
