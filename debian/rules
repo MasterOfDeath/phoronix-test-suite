@@ -17,7 +17,7 @@ execute_after_dh_install:
 
 	mv debian/phoronix-test-suite/usr/share/applications/phoronix-test-suite-launcher.desktop \
 	   debian/phoronix-test-suite/usr/share/applications/com.phoronix.PhoronixTestSuite.Launcher.desktop
-	
+
 	mv debian/phoronix-test-suite/usr/share/metainfo/phoronix-test-suite.appdata.xml \
 	   debian/phoronix-test-suite/usr/share/metainfo/com.phoronix.PhoronixTestSuite.metainfo.xml
 
