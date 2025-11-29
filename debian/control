@@ -19,10 +19,12 @@ Depends: ${misc:Depends},
  php-curl,
  php-sqlite3,
  php-bz2,
+ php-openssl,
  wget,
  unzip,
  xz-utils,
  mesa-utils
+Recommends: build-essential
 Description: Comprehensive automated testing and benchmarking platform
  The Phoronix Test Suite is the most comprehensive testing and benchmarking
  platform available. The Phoronix Test Suite allows for carrying out tests in a

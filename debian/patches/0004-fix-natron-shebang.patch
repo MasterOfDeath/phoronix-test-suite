@@ -1,0 +1,13 @@
+Description: Fix natron install script shebang. Fix a typo.
+Author: Rinat Gumirov <rinat.gumirov@mail.ru>
+Last-Update: 2025-11-28
+
+--- phoronix-test-suite-10.8.4.orig/ob-cache/test-profiles/pts/natron-1.0.0/install.sh
++++ phoronix-test-suite-10.8.4/ob-cache/test-profiles/pts/natron-1.0.0/install.sh
+@@ -1,5 +1,4 @@
+-#!/bin/s
+-h
++#!/bin/sh
+ tar -xf Natron-2.4.0-Linux-64-no-installer.tar.xz
+ unzip -o Natron_2.3.12_Spaceship.zip
+ echo "#!/bin/bash

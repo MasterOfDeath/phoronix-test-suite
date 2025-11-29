@@ -1,3 +1,7 @@
 0001-fix-man-page-syntax.patch
 0002-fix-deprecated-string-interpolation.patch
 0003-fix-deprecated-trigger-error.patch
+0004-fix-natron-shebang.patch
+0005-fix-appstream-metadata.patch
+0006-fix-missing-shebangs.patch
+0007-fix-systemd.patch

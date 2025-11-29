@@ -1,2 +1,22 @@
+# Program core and cache
 pts-core usr/share/phoronix-test-suite/
+ob-cache usr/share/phoronix-test-suite/
+deploy usr/share/phoronix-test-suite/
+
+# Wrapper script
 debian/scripts/phoronix-test-suite usr/bin
+
+# Desktop integration (Menu, icons)
+pts-core/static/phoronix-test-suite.desktop usr/share/applications/
+pts-core/static/phoronix-test-suite-launcher.desktop usr/share/applications/
+pts-core/static/phoronix-test-suite.appdata.xml usr/share/metainfo/
+
+# Application icons
+pts-core/static/images/phoronix-test-suite.png usr/share/icons/hicolor/48x48/apps/
+
+# MIME types (file associations) and their icons
+pts-core/openbenchmarking.org/openbenchmarking-mime.xml usr/share/mime/packages/
+pts-core/static/images/openbenchmarking.png usr/share/icons/hicolor/64x64/mimetypes/application-x-openbenchmarking.png
+
+# Systemd units (from deploy folder)
+deploy/*-systemd/*.service usr/lib/systemd/system/

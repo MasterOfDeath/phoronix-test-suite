@@ -1,0 +1,34 @@
+Description: Remove deprecated target
+Author: Rinat Gumirov <rinat.gumirov@mail.ru>
+Last-Update: 2025-11-29
+
+--- phoronix-test-suite-10.8.4.orig/deploy/phoromatic-systemd/phoromatic-client.service
++++ phoronix-test-suite-10.8.4/deploy/phoromatic-systemd/phoromatic-client.service
+@@ -1,6 +1,6 @@
+ [Unit]
+ Description=Phoronix Test Suite Phoromatic Client
+-After=syslog.target network-online.target
++After=network-online.target
+ Documentation=man:phoronix-test-suite(1)
+ 
+ [Service]
+--- phoronix-test-suite-10.8.4.orig/deploy/phoromatic-systemd/phoromatic-server.service
++++ phoronix-test-suite-10.8.4/deploy/phoromatic-systemd/phoromatic-server.service
+@@ -1,6 +1,6 @@
+ [Unit]
+ Description=Phoronix Test Suite Phoromatic Server
+-After=syslog.target network.target
++After=network.target
+ Documentation=man:phoronix-test-suite(1)
+ 
+ [Service]
+--- phoronix-test-suite-10.8.4.orig/deploy/phoromatic-systemd/phoronix-result-server.service
++++ phoronix-test-suite-10.8.4/deploy/phoromatic-systemd/phoronix-result-server.service
+@@ -1,6 +1,6 @@
+ [Unit]
+ Description=Phoronix Test Suite Result viewer
+-After=syslog.target network.target
++After=network.target
+ Documentation=man:phoronix-test-suite(1)
+ 
+ [Service]
