@@ -6,6 +6,9 @@
 override_dh_auto_build:
 override_dh_auto_test:
 
+override_dh_installsystemd:
+	dh_installsystemd --no-enable --no-start
+
 execute_after_dh_install:
 	rm -f debian/phoronix-test-suite/usr/share/phoronix-test-suite/pts-core/static/phoronix-test-suite.desktop
 	rm -f debian/phoronix-test-suite/usr/share/phoronix-test-suite/pts-core/static/phoronix-test-suite-launcher.desktop
