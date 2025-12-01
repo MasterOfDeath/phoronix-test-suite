@@ -1,5 +1,6 @@
 Description: Fix PHP 8.4 deprecation by downgrading E_USER_ERROR to E_USER_WARNING
 Author: Rinat Gumirov <rinat.gumirov@mail.ru>
+Forwarded: not-needed
 Last-Update: 2025-11-28
 
 --- phoronix-test-suite-10.8.4.orig/pts-core/commands/intersect.php
