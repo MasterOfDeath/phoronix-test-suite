@@ -3,7 +3,7 @@ Maintainer: Rinat Gumirov <rinat.gumirov@mail.ru>
 Section: utils
 Priority: optional
 Build-Depends: debhelper-compat (= 13), php-cli, php-xml
-Standards-Version: 4.7.0
+Standards-Version: 4.7.2
 Homepage: https://www.phoronix-test-suite.com/
 Vcs-Browser: https://github.com/phoronix-test-suite/phoronix-test-suite
 Vcs-Git: https://github.com/phoronix-test-suite/phoronix-test-suite.git
