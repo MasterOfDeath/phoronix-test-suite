@@ -6,3 +6,4 @@
 0006-fix-missing-shebangs.patch
 0007-fix-systemd.patch
 0008-fix-phodevi-null-deprecation.patch
+0009-rename-fpdf-class.patch

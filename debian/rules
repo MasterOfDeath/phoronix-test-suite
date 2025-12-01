@@ -24,5 +24,7 @@ execute_after_dh_install:
 	mv debian/phoronix-test-suite/usr/share/metainfo/phoronix-test-suite.appdata.xml \
 	   debian/phoronix-test-suite/usr/share/metainfo/com.phoronix.PhoronixTestSuite.metainfo.xml
 
+	rm -f debian/phoronix-test-suite/usr/share/phoronix-test-suite/pts-core/objects/FPDF.php
+
 execute_after_dh_fixperms:
 	find debian/phoronix-test-suite/usr/share/phoronix-test-suite/ob-cache -name "*.sh" -exec chmod +x {} \;
