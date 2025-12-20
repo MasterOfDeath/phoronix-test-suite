@@ -1,0 +1,36 @@
+Source: phoronix-test-suite
+Maintainer: Rinat Gumirov <rinat.gumirov66@gmail.com>
+Section: utils
+Priority: optional
+Build-Depends: debhelper-compat (= 13), php-cli, php-xml
+Standards-Version: 4.7.2
+Homepage: https://www.phoronix-test-suite.com/
+Vcs-Browser: https://github.com/phoronix-test-suite/phoronix-test-suite
+Vcs-Git: https://github.com/phoronix-test-suite/phoronix-test-suite.git
+Rules-Requires-Root: no
+
+Package: phoronix-test-suite
+Architecture: all
+Depends: ${misc:Depends},
+ php-cli,
+ php-xml,
+ php-json,
+ php-gd,
+ php-zip,
+ php-curl,
+ php-sqlite3,
+ php-bz2,
+ wget,
+ unzip,
+ xz-utils,
+ mesa-utils
+Recommends: build-essential
+Description: Comprehensive automated testing and benchmarking platform
+ The Phoronix Test Suite is the most comprehensive testing and benchmarking
+ platform available. The Phoronix Test Suite allows for carrying out tests in a
+ fully automated manner from test installation to execution and reporting. The
+ Phoronix Test Suite is built to be extensible and ships with over 450 test
+ profiles and 100 test suites.
+ .
+ The software is designed to effectively carry out both qualitative and
+ quantitative benchmarks in a clean, reproducible, and easy-to-use manner.

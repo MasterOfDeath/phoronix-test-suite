@@ -1,0 +1,30 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_build:
+override_dh_auto_test:
+
+override_dh_installsystemd:
+	dh_installsystemd --no-enable --no-start
+
+execute_after_dh_install:
+	rm -f debian/phoronix-test-suite/usr/share/phoronix-test-suite/pts-core/static/phoronix-test-suite.desktop
+	rm -f debian/phoronix-test-suite/usr/share/phoronix-test-suite/pts-core/static/phoronix-test-suite-launcher.desktop
+	rm -f debian/phoronix-test-suite/usr/share/phoronix-test-suite/pts-core/openbenchmarking.org/openbenchmarking-mime.xml
+	rm -f debian/phoronix-test-suite/usr/share/phoronix-test-suite/pts-core/static/bash_completion
+
+	mv debian/phoronix-test-suite/usr/share/applications/phoronix-test-suite.desktop \
+	   debian/phoronix-test-suite/usr/share/applications/com.phoronix.PhoronixTestSuite.desktop
+
+	mv debian/phoronix-test-suite/usr/share/applications/phoronix-test-suite-launcher.desktop \
+	   debian/phoronix-test-suite/usr/share/applications/com.phoronix.PhoronixTestSuite.Launcher.desktop
+
+	mv debian/phoronix-test-suite/usr/share/metainfo/phoronix-test-suite.appdata.xml \
+	   debian/phoronix-test-suite/usr/share/metainfo/com.phoronix.PhoronixTestSuite.metainfo.xml
+
+	rm -f debian/phoronix-test-suite/usr/share/phoronix-test-suite/pts-core/objects/FPDF.php
+
+execute_after_dh_fixperms:
+	find debian/phoronix-test-suite/usr/share/phoronix-test-suite/ob-cache -name "*.sh" -exec chmod +x {} \;

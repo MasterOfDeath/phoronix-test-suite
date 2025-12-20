@@ -1,0 +1,12 @@
+Description: Fix syntax error in man page (remove trailing .TP)
+Author: Rinat Gumirov <rinat.gumirov66@gmail.com>
+Forwarded: not-needed
+Last-Update: 2025-11-26
+
+--- phoronix-test-suite-10.8.4.orig/documentation/man-pages/phoronix-test-suite.1
++++ phoronix-test-suite-10.8.4/documentation/man-pages/phoronix-test-suite.1
+@@ -458,4 +458,3 @@
+ .br
+ .SH AUTHORS
+ Copyright 2008 - 2022 by Phoronix Media, Michael Larabel.
+-.TP

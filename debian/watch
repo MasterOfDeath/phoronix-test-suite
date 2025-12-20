@@ -1,0 +1,4 @@
+version=4
+opts="filenamemangle=s%(?:.*?)?v?(\d[\d.]*)\.tar\.gz%phoronix-test-suite-$1.tar.gz%" \
+   https://github.com/phoronix-test-suite/phoronix-test-suite/tags \
+   (?:.*?/)?v?(\d[\d.]*)\.tar\.gz

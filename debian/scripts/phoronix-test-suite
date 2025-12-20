@@ -1,0 +1,3 @@
+#!/bin/sh
+PTS_DIR=/usr/share/phoronix-test-suite
+exec /usr/bin/php "$PTS_DIR/pts-core/phoronix-test-suite.php" "$@"

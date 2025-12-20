@@ -1,0 +1,13 @@
+# Temporary files from debhelper.
+.debhelper
+*.debhelper
+debhelper-build-stamp
+phoronix-test-suite.substvars
+phoronix-test-suite.debhelper.log
+
+# The package build directory.
+phoronix-test-suite/
+files
+
+# Built packages
+*.deb

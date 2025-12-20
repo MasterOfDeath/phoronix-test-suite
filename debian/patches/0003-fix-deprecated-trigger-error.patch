@@ -1,0 +1,328 @@
+Description: Fix PHP 8.4 deprecation by downgrading E_USER_ERROR to E_USER_WARNING
+Author: Rinat Gumirov <rinat.gumirov66@gmail.com>
+Forwarded: not-needed
+Last-Update: 2025-11-28
+
+--- phoronix-test-suite-10.8.4.orig/pts-core/commands/intersect.php
++++ phoronix-test-suite-10.8.4/pts-core/commands/intersect.php
+@@ -35,7 +35,7 @@ class intersect implements pts_option_in
+ 	{
+ 		if(count($to_union) < 2)
+ 		{
+-			trigger_error('Two or more results/suites must be passed to this sub-command.', E_USER_ERROR);
++			trigger_error('Two or more results/suites must be passed to this sub-command.', E_USER_WARNING);
+ 			return false;
+ 		}
+ 		$tests = array();
+--- phoronix-test-suite-10.8.4.orig/pts-core/commands/openbenchmarking_login.php
++++ phoronix-test-suite-10.8.4/pts-core/commands/openbenchmarking_login.php
+@@ -46,7 +46,7 @@ class openbenchmarking_login implements
+ 
+ 		if(!isset($json['openbenchmarking']) || isset($json['openbenchmarking']['response']['error']))
+ 		{
+-			trigger_error($json['openbenchmarking']['response']['error'], E_USER_ERROR);
++			trigger_error($json['openbenchmarking']['response']['error'], E_USER_WARNING);
+ 			pts_storage_object::remove_in_file(PTS_CORE_STORAGE, 'openbenchmarking');
+ 		}
+ 		else
+--- phoronix-test-suite-10.8.4.orig/pts-core/commands/start_phoromatic_server.php
++++ phoronix-test-suite-10.8.4/pts-core/commands/start_phoromatic_server.php
+@@ -29,13 +29,13 @@ class start_phoromatic_server implements
+ 	{
+ 		if(pts_client::create_lock(PTS_USER_PATH . 'phoromatic_server_lock') == false)
+ 		{
+-			trigger_error('The Phoromatic Server is already running.', E_USER_ERROR);
++			trigger_error('The Phoromatic Server is already running.', E_USER_WARNING);
+ 			return false;
+ 		}
+ 
+ 		if(phodevi::is_windows())
+ 		{
+-			trigger_error('Running the Phoromatic Server on Windows is experimental and may have issues. Running the Phoromatic client and Phoronix Test Suite itself on Windows is supported but the Phoromatic Server is currently not engineered for Windows but can be under commercial engagement.', E_USER_ERROR);
++			trigger_error('Running the Phoromatic Server on Windows is experimental and may have issues. Running the Phoromatic client and Phoronix Test Suite itself on Windows is supported but the Phoromatic Server is currently not engineered for Windows but can be under commercial engagement.', E_USER_WARNING);
+ 		}
+ 
+ 		pts_file_io::unlink(getenv('PTS_EXT_LAUNCH_SCRIPT_DIR') . '/phoromatic-server-launcher');
+@@ -96,7 +96,7 @@ class start_phoromatic_server implements
+ 			if(($fp = fsockopen('127.0.0.1', $remote_access, $errno, $errstr, 5)) != false)
+ 			{
+ 				fclose($fp);
+-				trigger_error('Port ' . $remote_access . ' is already in use by another server process. Close that process or change the Phoronix Test Suite server port via' . pts_config::get_config_file_location() . ' to proceed.', E_USER_ERROR);
++				trigger_error('Port ' . $remote_access . ' is already in use by another server process. Close that process or change the Phoronix Test Suite server port via' . pts_config::get_config_file_location() . ' to proceed.', E_USER_WARNING);
+ 				return false;
+ 			}
+ 			else
+--- phoronix-test-suite-10.8.4.orig/pts-core/commands/start_remote_gui_server.php
++++ phoronix-test-suite-10.8.4/pts-core/commands/start_remote_gui_server.php
+@@ -51,7 +51,7 @@ class start_remote_gui_server implements
+ 
+ 			if(($fp = fsockopen('127.0.0.1', $remote_access, $errno, $errstr, 5)) != false)
+ 			{
+-				trigger_error('Port ' . $remote_access . ' is already in use by another server process. Close that process or change the Phoronix Test Suite server port via ' . pts_config::get_config_file_location() . ' to proceed.', E_USER_ERROR);
++				trigger_error('Port ' . $remote_access . ' is already in use by another server process. Close that process or change the Phoronix Test Suite server port via ' . pts_config::get_config_file_location() . ' to proceed.', E_USER_WARNING);
+ 				fclose($fp);
+ 				return false;
+ 			}
+--- phoronix-test-suite-10.8.4.orig/pts-core/commands/upload_result.php
++++ phoronix-test-suite-10.8.4/pts-core/commands/upload_result.php
+@@ -43,7 +43,7 @@ class upload_result implements pts_optio
+ 		}
+ 		if(!pts_openbenchmarking::ob_upload_support_available())
+ 		{
+-			trigger_error('No OpenBenchmarking.org upload support available.', E_USER_ERROR);
++			trigger_error('No OpenBenchmarking.org upload support available.', E_USER_WARNING);
+ 			return false;
+ 		}
+ 
+--- phoronix-test-suite-10.8.4.orig/pts-core/modules/load_dynamic_result_viewer.php
++++ phoronix-test-suite-10.8.4/pts-core/modules/load_dynamic_result_viewer.php
+@@ -119,7 +119,7 @@ class load_dynamic_result_viewer extends
+ 					return;
+ 				}
+ 			}
+-			//trigger_error('The result viewer is already running.', E_USER_ERROR);
++			//trigger_error('The result viewer is already running.', E_USER_WARNING);
+ 			return false;
+ 		}
+ 		if(PHP_VERSION_ID < 50400)
+@@ -171,7 +171,7 @@ class load_dynamic_result_viewer extends
+ 		if(($fp = fsockopen('127.0.0.1', $remote_access, $errno, $errstr, 5)) != false)
+ 		{
+ 			fclose($fp);
+-			//trigger_error('Port ' . $remote_access . ' is already in use by another server process. Close that process or change the Phoronix Test Suite server port via' . pts_config::get_config_file_location() . ' to proceed.', E_USER_ERROR);
++			//trigger_error('Port ' . $remote_access . ' is already in use by another server process. Close that process or change the Phoronix Test Suite server port via' . pts_config::get_config_file_location() . ' to proceed.', E_USER_WARNING);
+ 			return false;
+ 		}
+ 		else
+--- phoronix-test-suite-10.8.4.orig/pts-core/modules/phoromatic.php
++++ phoronix-test-suite-10.8.4/pts-core/modules/phoromatic.php
+@@ -467,7 +467,7 @@ class phoromatic extends pts_module_inte
+ 	{
+ 		if(pts_client::create_lock(PTS_USER_PATH . 'phoromatic_lock') == false)
+ 		{
+-			trigger_error('Phoromatic is already running.', E_USER_ERROR);
++			trigger_error('Phoromatic is already running.', E_USER_WARNING);
+ 			return false;
+ 		}
+ 		define('PHOROMATIC_PROCESS', true);
+@@ -523,7 +523,7 @@ class phoromatic extends pts_module_inte
+ 
+ 				if($times_failed >= 2)
+ 				{
+-					trigger_error('Communication with server failed.', E_USER_ERROR);
++					trigger_error('Communication with server failed.', E_USER_WARNING);
+ 
+ 					if(PTS_IS_DAEMONIZED_SERVER_PROCESS == false && $times_failed > 5)
+ 					{
+@@ -558,7 +558,7 @@ class phoromatic extends pts_module_inte
+ 				{
+ 					if(isset($json['phoromatic']['error']) && !empty($json['phoromatic']['error']))
+ 					{
+-						trigger_error($json['phoromatic']['error'], E_USER_ERROR);
++						trigger_error($json['phoromatic']['error'], E_USER_WARNING);
+ 					}
+ 					if(isset($json['phoromatic']['response']) && !empty($json['phoromatic']['response']))
+ 					{
+--- phoronix-test-suite-10.8.4.orig/pts-core/objects/client/pts_client.php
++++ phoronix-test-suite-10.8.4/pts-core/objects/client/pts_client.php
+@@ -1300,11 +1300,11 @@ class pts_client
+ 
+ 					if((isset($pass_args[$argument_check->get_argument_index()]) && !empty($pass_args[$argument_check->get_argument_index()])) || ($argument_check->get_argument_index() == 'VARIABLE_LENGTH' && !empty($pass_args)))
+ 					{
+-						trigger_error('Invalid Argument: ' . implode(' ', $pass_args), E_USER_ERROR);
++						trigger_error('Invalid Argument: ' . implode(' ', $pass_args), E_USER_WARNING);
+ 					}
+ 					else
+ 					{
+-						trigger_error('Phoronix Test Suite Argument Missing', E_USER_ERROR);
++						trigger_error('Phoronix Test Suite Argument Missing', E_USER_WARNING);
+ 					}
+ 
+ 					echo PHP_EOL . pts_client::cli_just_bold('CORRECT SYNTAX:') . PHP_EOL . 'phoronix-test-suite ' . str_replace('_', '-', $command_alias) . ' ' . pts_client::cli_just_italic(implode(' ', $argument_checks)) . PHP_EOL . PHP_EOL;
+@@ -2102,7 +2102,7 @@ class pts_client
+ 
+ 			if($pid == -1)
+ 			{
+-				trigger_error('Could not fork ' . $function . '.', E_USER_ERROR);
++				trigger_error('Could not fork ' . $function . '.', E_USER_WARNING);
+ 			}
+ 			else if($pid)
+ 			{
+@@ -2144,7 +2144,7 @@ class pts_client
+ 				$function = implode(':', $function);
+ 			}
+ 
+-			trigger_error('php-pcntl and php-posix must be installed for calling ' . $function . '.', E_USER_ERROR);
++			trigger_error('php-pcntl and php-posix must be installed for calling ' . $function . '.', E_USER_WARNING);
+ 		}
+ 	}
+ 	public static function fork($fork_function, $fork_function_parameters = null)
+@@ -2161,7 +2161,7 @@ class pts_client
+ 
+ 			if($pid == -1)
+ 			{
+-				trigger_error('Could not fork ' . $fork_function . '.', E_USER_ERROR);
++				trigger_error('Could not fork ' . $fork_function . '.', E_USER_WARNING);
+ 			}
+ 			else if($pid)
+ 			{
+--- phoronix-test-suite-10.8.4.orig/pts-core/objects/client/pts_module.php
++++ phoronix-test-suite-10.8.4/pts-core/objects/client/pts_module.php
+@@ -235,7 +235,7 @@ class pts_module
+ 		}
+ 		else
+ 		{
+-			trigger_error('php-pcntl must be installed for the ' . self::module_name() . ' module.', E_USER_ERROR);
++			trigger_error('php-pcntl must be installed for the ' . self::module_name() . ' module.', E_USER_WARNING);
+ 		}
+ 	}
+ 	private static function module_name()
+--- phoronix-test-suite-10.8.4.orig/pts-core/objects/client/pts_openbenchmarking_client.php
++++ phoronix-test-suite-10.8.4/pts-core/objects/client/pts_openbenchmarking_client.php
+@@ -214,7 +214,7 @@ class pts_openbenchmarking_client
+ 				else
+ 				{
+ 					pts_storage_object::set_in_file(PTS_CORE_STORAGE, 'openbenchmarking', false);
+-					trigger_error('Invalid OpenBenchmarking.org account supplied, please re-login.', E_USER_ERROR);
++					trigger_error('Invalid OpenBenchmarking.org account supplied, please re-login.', E_USER_WARNING);
+ 				}
+ 			}
+ 			else
+--- phoronix-test-suite-10.8.4.orig/pts-core/objects/client/pts_test_installer.php
++++ phoronix-test-suite-10.8.4/pts-core/objects/client/pts_test_installer.php
+@@ -72,13 +72,13 @@ class pts_test_installer
+ 		// Install tests
+ 		if(!is_writable(pts_client::test_install_root_path()))
+ 		{
+-			trigger_error('The test installation directory is not writable.' . PHP_EOL . 'Location: ' . pts_client::test_install_root_path(), E_USER_ERROR);
++			trigger_error('The test installation directory is not writable.' . PHP_EOL . 'Location: ' . pts_client::test_install_root_path(), E_USER_WARNING);
+ 			return false;
+ 		}
+ 		$mount_options = phodevi::read_property('disk', 'mount-options');
+ 		if(isset($mount_options['mount-options']) && strpos($mount_options['mount-options'], 'noexec') !== false)
+ 		{
+-			trigger_error('The test installation directory is on a file-system mounted with the \'noexec\' mount option. Re-mount the file-system appropriately or change the Phoronix Test Suite user configuration file to point to an alternative mount point.' . PHP_EOL . 'Location: ' . pts_client::test_install_root_path(), E_USER_ERROR);
++			trigger_error('The test installation directory is on a file-system mounted with the \'noexec\' mount option. Re-mount the file-system appropriately or change the Phoronix Test Suite user configuration file to point to an alternative mount point.' . PHP_EOL . 'Location: ' . pts_client::test_install_root_path(), E_USER_WARNING);
+ 			return false;
+ 		}
+ 
+--- phoronix-test-suite-10.8.4.orig/pts-core/objects/client/pts_test_run_manager.php
++++ phoronix-test-suite-10.8.4/pts-core/objects/client/pts_test_run_manager.php
+@@ -875,20 +875,20 @@ class pts_test_run_manager
+ 
+ 		if($this->batch_mode && $this->batch_mode['Configured'] == false && !$this->auto_mode)
+ 		{
+-			trigger_error('The batch mode must first be configured.' . PHP_EOL . 'To configure, run phoronix-test-suite batch-setup', E_USER_ERROR);
++			trigger_error('The batch mode must first be configured.' . PHP_EOL . 'To configure, run phoronix-test-suite batch-setup', E_USER_WARNING);
+ 			return false;
+ 		}
+ 
+ 		if(!is_writable(pts_client::test_install_root_path()))
+ 		{
+-			trigger_error('The test installation directory is not writable.' . PHP_EOL . 'Location: ' . pts_client::test_install_root_path(), E_USER_ERROR);
++			trigger_error('The test installation directory is not writable.' . PHP_EOL . 'Location: ' . pts_client::test_install_root_path(), E_USER_WARNING);
+ 			return false;
+ 		}
+ 
+ 		$mount_options = phodevi::read_property('disk', 'mount-options');
+ 		if(isset($mount_options['mount-options']) && strpos($mount_options['mount-options'], 'noexec') !== false)
+ 		{
+-			trigger_error('The test installation directory is on a file-system mounted with the \'noexec\' mount option. Re-mount the file-system appropriately or change the Phoronix Test Suite user configuration file to point to an alternative mount point.' . PHP_EOL . 'Location: ' . pts_client::test_install_root_path(), E_USER_ERROR);
++			trigger_error('The test installation directory is on a file-system mounted with the \'noexec\' mount option. Re-mount the file-system appropriately or change the Phoronix Test Suite user configuration file to point to an alternative mount point.' . PHP_EOL . 'Location: ' . pts_client::test_install_root_path(), E_USER_WARNING);
+ 			return false;
+ 		}
+ 
+@@ -899,7 +899,7 @@ class pts_test_run_manager
+ 		}
+ 		else if(count($to_run) == 0)
+ 		{
+-			//trigger_error('You must enter at least one test, suite, or result identifier to run.', E_USER_ERROR);
++			//trigger_error('You must enter at least one test, suite, or result identifier to run.', E_USER_WARNING);
+ 			return false;
+ 		}
+ 
+@@ -1361,7 +1361,7 @@ class pts_test_run_manager
+ 
+ 			if(count($tests_missing) == 1)
+ 			{
+-				trigger_error($tests_missing[0] . ' is not installed.', E_USER_ERROR);
++				trigger_error($tests_missing[0] . ' is not installed.', E_USER_WARNING);
+ 				// PHP_EOL . 'To install, run: phoronix-test-suite install ' . $tests_missing[0]
+ 			}
+ 			else
+@@ -1694,7 +1694,7 @@ class pts_test_run_manager
+ 			}
+ 			else
+ 			{
+-				trigger_error($run_object . ' is not recognized.', E_USER_ERROR);
++				trigger_error($run_object . ' is not recognized.', E_USER_WARNING);
+ 				continue;
+ 			}
+ 		}
+--- phoronix-test-suite-10.8.4.orig/pts-core/objects/pts_compression.php
++++ phoronix-test-suite-10.8.4/pts-core/objects/pts_compression.php
+@@ -131,7 +131,7 @@ class pts_compression
+ 		}
+ 		else if(PTS_IS_CLIENT)
+ 		{
+-			trigger_error('Failed to find ZIP support for extracting file: ' . $zip_file . '. Install PHP ZIP support or the unzip utility.', E_USER_ERROR);
++			trigger_error('Failed to find ZIP support for extracting file: ' . $zip_file . '. Install PHP ZIP support or the unzip utility.', E_USER_WARNING);
+ 		}
+ 
+ 		return $success;
+--- phoronix-test-suite-10.8.4.orig/pts-core/objects/pts_openbenchmarking.php
++++ phoronix-test-suite-10.8.4/pts-core/objects/pts_openbenchmarking.php
+@@ -175,7 +175,7 @@ class pts_openbenchmarking
+ 		}
+ 		else if(PTS_IS_CLIENT && isset($json_response['openbenchmarking']['result']['error']))
+ 		{
+-			trigger_error($json_response['openbenchmarking']['result']['error'], E_USER_ERROR);
++			trigger_error($json_response['openbenchmarking']['result']['error'], E_USER_WARNING);
+ 		}
+ 
+ 		return $valid;
+@@ -650,7 +650,7 @@ class pts_openbenchmarking
+ 			{
+ 				if(!defined('PHOROMATIC_SERVER'))
+ 				{
+-					trigger_error('Unable to obtain ' . $qualified_identifier . ' from OpenBenchmarking.org. ' . (!pts_network::internet_support_available() ? 'Internet connection disabled/unavailable.' : 'If this issue persists, file an issue @ https://github.com/phoronix-test-suite/phoronix-test-suite/issues') . PHP_EOL, E_USER_ERROR);
++					trigger_error('Unable to obtain ' . $qualified_identifier . ' from OpenBenchmarking.org. ' . (!pts_network::internet_support_available() ? 'Internet connection disabled/unavailable.' : 'If this issue persists, file an issue @ https://github.com/phoronix-test-suite/phoronix-test-suite/issues') . PHP_EOL, E_USER_WARNING);
+ 				}
+ 				return false;
+ 			}
+@@ -678,7 +678,7 @@ class pts_openbenchmarking
+ 			else
+ 			{
+ 				unlink($file);
+-				//trigger_error('Test definition not found for ' . $qualified_identifier . '.' . PHP_EOL, E_USER_ERROR);
++				//trigger_error('Test definition not found for ' . $qualified_identifier . '.' . PHP_EOL, E_USER_WARNING);
+ 				return false;
+ 			}
+ 		}
+@@ -910,7 +910,7 @@ class pts_openbenchmarking
+ 			{
+ 				if(!defined('PHOROMATIC_SERVER'))
+ 				{
+-					trigger_error('Unable to obtain ' . $qualified_identifier . ' from OpenBenchmarking.org. ' . (!pts_network::internet_support_available() ? 'Internet connection disabled/unavailable.' : 'If this issue persists, file an issue @ https://github.com/phoronix-test-suite/phoronix-test-suite/issues') . PHP_EOL, E_USER_ERROR);
++					trigger_error('Unable to obtain ' . $qualified_identifier . ' from OpenBenchmarking.org. ' . (!pts_network::internet_support_available() ? 'Internet connection disabled/unavailable.' : 'If this issue persists, file an issue @ https://github.com/phoronix-test-suite/phoronix-test-suite/issues') . PHP_EOL, E_USER_WARNING);
+ 				}
+ 				return false;
+ 			}
+--- phoronix-test-suite-10.8.4.orig/pts-core/objects/pts_openbenchmarking_upload.php
++++ phoronix-test-suite-10.8.4/pts-core/objects/pts_openbenchmarking_upload.php
+@@ -156,13 +156,13 @@ class pts_openbenchmarking_upload extend
+ 
+ 		if(!is_array($json_response))
+ 		{
+-			trigger_error('Unhandled Exception', E_USER_ERROR);
++			trigger_error('Unhandled Exception', E_USER_WARNING);
+ 			return false;
+ 		}
+ 
+ 		if(isset($json_response['openbenchmarking']['upload']['error']))
+ 		{
+-			trigger_error($json_response['openbenchmarking']['upload']['error'], E_USER_ERROR);
++			trigger_error($json_response['openbenchmarking']['upload']['error'], E_USER_WARNING);
+ 		}
+ 		if(isset($json_response['openbenchmarking']['upload']['url']))
+ 		{

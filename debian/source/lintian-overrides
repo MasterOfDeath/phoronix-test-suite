@@ -1,0 +1,9 @@
+# These files contain long lines (likely base64 data or generated content) 
+# but they are the editable source for this upstream project.
+source-is-missing [documentation/*]
+source-is-missing [pts-core/*]
+
+# Ignore line length warnings globally or for specific patterns
+very-long-line-length-in-source-file *
+
+source-contains-prebuilt-javascript-object [pts-core/web-interface/js/pts-web-interface.js]
