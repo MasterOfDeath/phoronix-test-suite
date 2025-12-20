@@ -1,5 +1,5 @@
 Description: Fix PHP 8.4 deprecation by downgrading E_USER_ERROR to E_USER_WARNING
-Author: Rinat Gumirov <rinat.gumirov@mail.ru>
+Author: Rinat Gumirov <rinat.gumirov66@gmail.com>
 Forwarded: not-needed
 Last-Update: 2025-11-28
 

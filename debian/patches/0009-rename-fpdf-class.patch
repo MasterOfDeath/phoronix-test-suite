@@ -5,7 +5,7 @@ Description: Rename FPDF class to pts_FPDF and convert to Unix LF
  2. Renames the FPDF class to pts_FPDF to avoid conflicts with
     system libraries and comply with Debian policy regarding
     embedded code copies.
-Author: Rinat Gumirov <rinat.gumirov@mail.ru>
+Author: Rinat Gumirov <rinat.gumirov66@gmail.com>
 Forwarded: not-needed
 Last-Update: 2025-12-01
 

@@ -1,5 +1,5 @@
 Source: phoronix-test-suite
-Maintainer: Rinat Gumirov <rinat.gumirov@mail.ru>
+Maintainer: Rinat Gumirov <rinat.gumirov66@gmail.com>
 Section: utils
 Priority: optional
 Build-Depends: debhelper-compat (= 13), php-cli, php-xml
